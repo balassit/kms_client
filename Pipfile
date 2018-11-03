@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "3.6"
+
+[packages]
+boto3 = "*"
+twine = "*"
+
+[dev-packages]
+behave = "*"
+coverage = "*"
+"autopep8" = "*"
+pre-commit = "*"
+black = "*"
+twine = "*"
+keyring = "*"
