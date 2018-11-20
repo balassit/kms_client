@@ -19,7 +19,7 @@ clean:
 	rm -rf build dist kms_client.egg-info
 
 .PHONY: test
-test: _venv_dev run-test clean clean-unit-test
+test: _venv_dev run-test
 
 .PHONY: run-test
 run-test:
