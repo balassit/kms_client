@@ -18,6 +18,21 @@ clean:
 	pipenv --rm && \
 	rm -rf build dist kms_client.egg-info
 
+.PHONY: test
+test: _venv_dev run-test clean clean-unit-test
+
+.PHONY: run-test
+run-test:
+	$(PIP_RUN) pytest tests/unit_tests && \
+	$(PIP_RUN) coverage run -m --source=tests/unit_tests/ unittest discover && \
+	$(PIP_RUN) coverage report
+
+.PHONY: clean-unit-test
+clean-unit-test:
+	rm -rf __pycache__ && \
+	rm -rf .pytest_cache && \
+	rm -rf tests/unit_tests/__pycache__
+
 .PHONY: upload-test
 upload-test: install
 	$(PIP_RUN) twine upload --repository-url https://test.pypi.org/legacy/ dist/*
