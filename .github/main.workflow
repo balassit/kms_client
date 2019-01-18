@@ -10,7 +10,7 @@ action "check" {
 
 action "sdist" {
   uses = "ross/python-actions/setup-py/3.7@627646f"
-  args = "sdist"
+  args = "sdist bdist_wheel"
   needs = "check"
 }
 
