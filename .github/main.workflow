@@ -4,25 +4,25 @@ workflow "check, sdist, and upload" {
 }
 
 action "check" {
-  uses = "balassit/python-actions/setup-py/3.7@1.2"
+  uses = "ross/python-actions/setup-py/3.7@627646f"
   args = "check"
-  env = {
-    WORKDIR = "example"
-  }
 }
 
 action "sdist" {
-  uses = "balassit/python-actions/setup-py/3.7@1.2"
+  uses = "ross/python-actions/setup-py/3.7@627646f"
   args = "sdist"
-  env = {
-    WORKDIR = "example"
-  }
   needs = "check"
 }
 
+action "filter-to-branch-master" {
+  uses = "actions/bin/filter@master"
+  needs = ["check"]
+  args = "branch master"
+}
+
 action "upload" {
-  uses = "balassit/python-actions/twine@1.2"
-  args = "upload ./example/dist/ross-pypi-test-*.tar.gz"
+  uses = "ross/python-actions/twine@627646f"
+  args = "upload ./dist/kms_client-*.tar.gz"
   secrets = ["TWINE_PASSWORD", "TWINE_USERNAME"]
-  needs = "sdist"
+  needs = "filter-to-branch-master"
 }
