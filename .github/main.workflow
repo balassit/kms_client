@@ -16,7 +16,7 @@ action "sdist" {
 
 action "filter-to-branch-master" {
   uses = "actions/bin/filter@master"
-  needs = ["check"]
+  needs = ["sdist"]
   args = "branch master"
 }
 
